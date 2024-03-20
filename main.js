@@ -1,13 +1,13 @@
 function operation(operator , numb1 , numb2){
     switch(operator){   
         case '+' :
-            return numb1 + numb2 ;
+            return Number(numb1) + Number(numb2) ;
         case '-' : 
-            return numb1 - numb2 ;
+            return Number(numb1) - Number(numb2) ;
         case '*' : 
-            return numb1 * numb2 ;
+            return Number(numb1) * Number(numb2) ;
         case '/' :
-            return numb1 / numb2 ;
+            return Number(numb1) / Number(numb2) ;
         default :
             return 'error' ;
     }
@@ -75,18 +75,39 @@ keyboard.operationKeys.forEach(key => {
         }
     });
 });
-// trigger operation !!bug!!
+// trigger operation 
 document.querySelector('#equal-bttn').addEventListener('click' ,e=>{
     if (resultVar.numb1.innerText != '' && resultVar.numb2.innerText != '' && resultVar.operator.innerText != ''){
         let num1 = resultVar.numb1.innerText ;
         let num2 = resultVar.numb2.innerText ;
         let opert = resultVar.operator.innerText ;    
-        let result = operation(opert , num1 , num2) ;
+        let result = operation(opert , num1 , num2);
         //clear equation 
-        document.querySelector('#show-result-var').firstElementChild.forEach(node =>{
+        let nodes = document.querySelector('#show-result-var').firstElementChild.childNodes;
+        nodes.forEach(node =>{
                 node.innerText = '';
         });
         //update result spot
         document.querySelector('#result').innerText = result ;
+    } else {
+        console.log('No trigged');
     }
 });
+
+
+
+function testOp() {
+    let op = ['+' , '-' , '*' , '/' , '='];
+    let numb = ['1' , '5' , '10' ];
+    let numb2 = [1 , 2 , 3 , 5];
+    let result = {
+        str : [] ,
+        num : []
+    }
+    op.forEach(op=>{
+         numb.forEach(str => {
+             result.str.push(operation(op , str , '1'))
+         })
+    });
+
+}
