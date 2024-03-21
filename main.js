@@ -1,4 +1,7 @@
-function operation(operator , numb1 , numb2){
+function operation(oprt , num1 , num2){
+    let numb1 = num1;
+    let numb2 = num2;
+    let operator = oprt ;
     switch(operator){   
         case '+' :
             return Number(numb1) + Number(numb2) ;
@@ -50,17 +53,27 @@ const resultVar = {
 
 } 
 
-
+function addKey(keyValue = '' , tag){
+    tag.innerText += keyValue ;
+}
 // events
 
-// add number 
+// add number  // remake with switch please 
 keyboard.numberKeys.forEach( key => {
     key.addEventListener('click' , e=>{
         if(resultVar.numb1.innerText == '' && resultVar.operator.innerText == ''){
                 resultVar.addNumber1(key.innerText);
-        }else{
+        } 
+        else if (resultVar.numb1.innerText != '' && resultVar.operator.innerText == '') {
+            resultVar.numb1.innerText += key.innerText ;
+        }
+        else if (resultVar.numb2.innerText == '' && resultVar.operator.innerText != '') {
                 resultVar.addNumber2(key.innerText);
         }
+        else if (resultVar.numb2.innerText != '' && resultVar.operator.innerText != '') {
+            resultVar.numb2.innerText+= key.innerText ;
+        }
+        
     });
 });
 //add operator
@@ -74,40 +87,17 @@ keyboard.operationKeys.forEach(key => {
             }
         }
     });
-});
+    });
 // trigger operation 
 document.querySelector('#equal-bttn').addEventListener('click' ,e=>{
     if (resultVar.numb1.innerText != '' && resultVar.numb2.innerText != '' && resultVar.operator.innerText != ''){
-        let num1 = resultVar.numb1.innerText ;
-        let num2 = resultVar.numb2.innerText ;
-        let opert = resultVar.operator.innerText ;    
-        let result = operation(opert , num1 , num2);
-        //clear equation 
-        let nodes = document.querySelector('#show-result-var').firstElementChild.childNodes;
-        nodes.forEach(node =>{
-                node.innerText = '';
-        });
-        //update result spot
-        document.querySelector('#result').innerText = result ;
-    } else {
-        console.log('No trigged');
+        let result = operation(resultVar.operator.innerText ,resultVar.numb1.innerText, resultVar.numb2.innerText );
+        resultVar.addNumber1(result);
+        //clear equation
+        resultVar.addNumber2('');
+        resultVar.addOperator('');
+        
     }
 });
 
 
-
-function testOp() {
-    let op = ['+' , '-' , '*' , '/' , '='];
-    let numb = ['1' , '5' , '10' ];
-    let numb2 = [1 , 2 , 3 , 5];
-    let result = {
-        str : [] ,
-        num : []
-    }
-    op.forEach(op=>{
-         numb.forEach(str => {
-             result.str.push(operation(op , str , '1'))
-         })
-    });
-
-}
