@@ -1,4 +1,10 @@
 # Calculator
 
-
-1) bug at triggin operation event , equal-key didn't triggering event 
+tweaks :
+    * addSign :
+        if you want to 
+            -3 - -3 = 0
+        show as :
+            -3 - (-3) = 0
+implementations on process : 
+    - add clean equation button 
