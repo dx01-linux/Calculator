@@ -1,4 +1,3 @@
-// don't handle %
 
 function operation(operator = '', num1 = '', num2 = '') {
     let numb1 = num1;
@@ -93,7 +92,6 @@ const resultVar = {
             if (minusCounter == 1) {
                 // remove frist element '-'
                 targetText.shift();
-                console.log(targetText);
                 // update target
                 target.innerText = targetText.join('');
 
@@ -102,7 +100,6 @@ const resultVar = {
             else {
                 //add '-'
                 targetText.unshift('-')
-                console.log(targetText);
                 // update target
                 target.innerText = targetText.join('');
             }
@@ -133,7 +130,7 @@ const resultVar = {
                 target.innerText = targetText.join('');
             }
         }
-    } ,
+    },
     
 }
 // events :
