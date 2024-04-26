@@ -1,0 +1,34 @@
+* , body , #wrapper {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+#keyboard , #show-result-var {
+    padding: 0% 10%;
+}
+
+#show-result-var ul {
+    list-style: none;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 3.5em;
+    height: 1em;
+}
+#keyboard > ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+#keyboard li {
+    display : flex ;
+    flex : auto ;
+}
+
+#keyboard button {
+    flex: auto;
+    font-size: 3em;
+    border : none ;
+}
