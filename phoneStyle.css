@@ -64,6 +64,7 @@ body {
     background-color: var(--numb-bttn-color);
     border-color: var(--numb-bttn-color);
 }
+
 /* cero key */
 #keyboard :nth-child(17) {
     grid-column: 1 / span 2;
@@ -75,4 +76,3 @@ body {
     position: relative;
     visibility: hidden;
 }
-

@@ -34,8 +34,9 @@ body {
         "two two two two three three three"
         "two two two two three three three";
 }
-#wrapper > :nth-child(n){
-    border: 1px solid #444242 ;
+
+#wrapper> :nth-child(n) {
+    border: 1px solid #444242;
 }
 
 #show-result-var {
@@ -77,18 +78,21 @@ body {
     border-color: var(--numb-bttn-color);
 }
 
-#keyboard :nth-child(n){
-    border: 1px solid #444242 ;
-    color : white ;
+#keyboard :nth-child(n) {
+    border: 1px solid #444242;
+    color: white;
 }
+
 /* porcent key */
 #keyboard :nth-child(3) {
     background-color: black;
 }
+
 /* equal key */
 #keyboard :last-child {
     background-color: var(--operator-color);
 }
+
 /* cero key */
 #keyboard :nth-child(17) {
     grid-column: 1 / span 2;
@@ -97,19 +101,21 @@ body {
 #operation-book {
     grid-area: three;
     color: white;
-    display: flex ;
+    display: flex;
     flex-flow: column wrap;
     row-gap: 5px;
     overflow: scroll;
 }
+
 .operation {
     height: calc(100% / 10%);
     font-size: 2rem;
     background-color: gray;
 }
+
 /* icon for deleting all saved operations */
-#operation-book > :nth-child(1){
-    color : red ;
+#operation-book> :nth-child(1) {
+    color: red;
     align-self: center;
     font-size: 3rem;
 }
