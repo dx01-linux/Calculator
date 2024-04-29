@@ -1,12 +1,13 @@
 
+//calculator >>>
 function operate(operator = '', num1 = '', num2 = '') {
     let numb1 = num1;
     let numb2 = num2;
 
     //check if num1 or num2 is a porcent
-    if(numb1.includes('%')|| numb2.includes('%')){
+    if (numb1.includes('%') || numb2.includes('%')) {
         //return value / 100
-        function toPorcent(Str){
+        function toPorcent(Str) {
             //get a copy to array of num1 or num2
             let str = Array.from(Str);
             //pop out % sign
@@ -14,11 +15,11 @@ function operate(operator = '', num1 = '', num2 = '') {
             //return value to string / 100 => value / 100 = porcent%
             return Number(str.join('')) / 100
         }
-        if(num1.includes('%')){
+        if (num1.includes('%')) {
             numb1 = toPorcent(num1);
         } else {
             numb2 = toPorcent(num2);
-        }     
+        }
     }
     //check for operators
     switch (operator) {
@@ -39,29 +40,29 @@ const keyboard = {
     operationKeys: document.querySelectorAll('.operation-bttn'),
     specialKeys: document.querySelectorAll('.special-bttn'),
 };
-
 const resVar = {
     numb1: document.querySelector('#numb1'),
-    numb2: document.querySelector('#numb2'),
     operator: document.querySelector('#operator'),
-    updateNumb : function(num = 'numb1' , value = '') {
-        if ( value == '') {
-            this[num].innerText = '' ;
+    numb2: document.querySelector('#numb2'),
+
+    updateNumb: function (num = 'numb1', value = '') {
+        if (value == '') {
+            this[num].innerText = '';
         } else {
-            this[num].innerText = value; 
+            this[num].innerText = value;
         }
     },
-    updateOperator : function(value){
+    updateOperator: function (value) {
         if (operator == '') {
             this.operator.innerText = '';
         } else {
             this.operator.innerText = value;
         }
     },
-    getOperator : function(){
-        return this.operator.innerText ;
+    getOperator: function () {
+        return this.operator.innerText;
     },
-    getNum : function(number = 'numb1'){
+    getNum: function (number = 'numb1') {
         return this[number].innerText;
     },
     addPoint: function (target) {
@@ -106,19 +107,19 @@ const resVar = {
         }
 
     },
-    addPorcent : function(target){
-            //get inner text and convert to string
+    addPorcent: function (target) {
+        //get inner text and convert to string
         let targetText = Array.from(target.innerText);
-        let counterPerSign = 0 ;
-            //check if it have porcent character 
+        let counterPerSign = 0;
+        //check if it have porcent character 
         targetText.forEach(char => {
-                if (char == '%'){
-                    counterPerSign += 1 ;
-                }
+            if (char == '%') {
+                counterPerSign += 1;
+            }
         });
-        if(counterPerSign == 0 || counterPerSign == 1){
+        if (counterPerSign == 0 || counterPerSign == 1) {
             //it have one % 
-            if(counterPerSign == 1){
+            if (counterPerSign == 1) {
                 targetText.pop();
                 console.log(targetText);
                 target.innerText = targetText.join('');
@@ -131,21 +132,66 @@ const resVar = {
             }
         }
     },
-    operate : function() {
+    operate: function () {
         if (this.numb1.innerText != '' && this.numb2.innerText != '' && this.operator.innerText != '') {
-            // take all of them and perform a operation , then asign result to numb1
-            this.updateNumb('numb1' ,
+            //update opration book
+            //get result
+            let result =
                 operate(this.operator.innerText,
                     this.numb1.innerText,
-                    this.numb2.innerText)
+                    this.numb2.innerText);
+            //update operation book ;
+            operationBook.addOperation(
+                resVar.getNum('numb1'),
+                resVar.getOperator(),
+                resVar.getNum('numb2'),
+                result
             );
+            //update resVar
+            // take all of them and perform a operation , then asign result to numb1
+            this.updateNumb('numb1', result);
             //clear numb2 & operator 
             this.updateNumb('numb2');
             this.updateOperator('');
+
         }
     }
-    
-}
+
+};
+// operation book >>>>
+const operationBook = {
+    operations: function () {
+        return document.querySelectorAll('.operation');
+    },
+    addOperation: function (numb, operation, numb2, result) {
+        //create new p
+        let op = document.createElement('p');
+        //create var who hold equation
+        let equation = document.createTextNode(`${numb} ${operation} ${numb2} = ${result}`);
+        //set p class for styling it
+        op.className = 'operation';
+        op.appendChild(equation);
+        // add eqation to operation book
+        document.querySelector('#operation-book').appendChild(op);
+    },
+    getOperation: function (operationStr = '') {
+        //get values 
+        let str = operationStr.split(' ');
+        //get numb1 , numb2 , operator key names
+        let keys = Object.keys(resVar)
+            .filter(key => {
+                if (key == 'numb1' || key == 'numb2' || key == 'operator') {
+                    return key;
+                }
+            });
+        let index = 0;
+        //set them in resVar 
+        for (let i of keys) {
+            resVar[i].innerText = str[index];
+            index++;
+        }
+    }
+};
 // events :
 
 // add number  
@@ -154,23 +200,23 @@ keyboard.numberKeys.forEach(key => {
         // #1 is being edited
         if (resVar.getOperator() == '') {
             if (resVar.numb1.innerText == '') {
-                resVar.updateNumb('numb1' ,  key.innerText);
+                resVar.updateNumb('numb1', key.innerText);
             } else {
                 // if % sign at the end , numb1 can't have more #
-                if(Array.from(numb1.innerText)[Array.from(numb1.innerText).length - 1] != '%'){
+                if (Array.from(numb1.innerText)[Array.from(numb1.innerText).length - 1] != '%') {
                     resVar.numb1.innerText += key.innerText;
-                }    
+                }
             }
         }
         // #2 is being edited
         if (resVar.getOperator() != '') {
             if (resVar.numb2.innerText == '') {
-                resVar.updateNumb('numb2' , key.innerText);
+                resVar.updateNumb('numb2', key.innerText);
             } else {
                 // if % sign at the end , numb2 can't have more #
-                if(Array.from(numb2.innerText)[Array.from(numb2.innerText).length - 1] != '%'){
+                if (Array.from(numb2.innerText)[Array.from(numb2.innerText).length - 1] != '%') {
                     resVar.numb2.innerText += key.innerText;
-                }  
+                }
             }
         }
 
@@ -180,7 +226,7 @@ keyboard.numberKeys.forEach(key => {
 keyboard.operationKeys.forEach(key => {
     key.addEventListener('click', e => {
         //operator hasn't been adeed
-        if(resVar.getOperator() == ''){
+        if (resVar.getOperator() == '') {
             //numb1 isn't ready , dont' add operator yet
             if (resVar.numb1.innerText == '') {
                 resVar.updateOperator('');
@@ -189,11 +235,11 @@ keyboard.operationKeys.forEach(key => {
             else {
                 resVar.updateOperator(key.innerText);
             }
-        } 
+        }
         // operator was added
         else if (resVar.getOperator() != '') {
             //trigger an operation asign to numb1 and add this new operator
-            if(resVar.getNum('numb2') != '' ){
+            if (resVar.getNum('numb2') != '') {
                 resVar.operate()
                 resVar.updateOperator(key.innerText);
             }
@@ -202,9 +248,9 @@ keyboard.operationKeys.forEach(key => {
 });
 // trigger operation by pressing equal sign
 document.querySelector('#equal-bttn').addEventListener('click', e => {
-    resVar.operate();
+    resVar.operate()
 });
-//special buttons :
+//opertors events :
 keyboard.specialKeys.forEach(key => {
     //check wich one was pressed
     key.addEventListener('click', e => {
@@ -234,18 +280,35 @@ keyboard.specialKeys.forEach(key => {
                 } else if (resVar.operator.innerText != '') {
                     resVar.addSign(resVar.numb2);
                 }
-                break ;
-            case '%' :
+                break;
+            case '%':
                 //switch to porcent
-                if (resVar.operator.innerText == ''){
+                if (resVar.operator.innerText == '') {
                     resVar.addPorcent(resVar.numb1);
-                } else if(resVar.operator.innerText != ''){
+                } else if (resVar.operator.innerText != '') {
                     resVar.addPorcent(resVar.numb2);
                 }
                 break;
-                
+
         }
 
 
     });
 });
+//restore old operation in Operation book
+operationBook.operations().forEach(operation => {
+    operation.addEventListener('click', (e) => {
+        operationBook.getOperation(operation.innerText);
+
+    })
+
+})
+//remove all operations in Operation Book
+document.querySelector('#operation-book').firstElementChild.addEventListener("click", e => {
+    operationBook.operations().forEach(op => {
+        document.querySelector('#operation-book').removeChild(op);
+    });
+});
+
+
+

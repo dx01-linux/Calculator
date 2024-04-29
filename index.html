@@ -3,59 +3,61 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="pcStyle.css">
+        <!-- <link rel="stylesheet" href="phoneStyle.css"> -->
+        <script>
+            let styleSheet = document.createElement('link');
+            if(window.screen.width <= 600){
+                styleSheet.setAttribute('href' , 'phoneStyle.css');
+                styleSheet.setAttribute('rel' , 'stylesheet');
+                // styleSheet.setAttribute('id' , 'phoneStyle');
+            } else { 
+                styleSheet.setAttribute('href' , 'pcStyle.css');
+                styleSheet.setAttribute('rel' , 'stylesheet');
+                // styleSheet.setAttribute('id' , 'pcStyle');
+            }
+            document.head.appendChild(styleSheet);
+        </script>
+        <script src="https://kit.fontawesome.com/1758d25008.js" crossorigin="anonymous"></script>
         <script src="main.js" defer></script>
-        <!-- <script>
-            // get what type of device it is 
-                //
-            // add mobile style or pc style 
-        </script> -->
         <title>Calculator</title>
     </head>
     <body>
         <div id="wrapper">
             <div id="show-result-var">
-                <ul>
-                    <li id='numb1'> </li>
-                    <li id='operator'> </li>
-                    <li id='numb2'> </li>
-                </ul>
+                <p id='numb1'>  </p>
+                <p id='operator'>  </p>
+                <p id='numb2'>  </p>
             </div>
             <div id="keyboard">
-                <ul>
-                    <li><button class = 'special-bttn'> C </button></li>
-                    <li><button class = 'special-bttn' > % </button></li>
-                    <li><button class = 'special-bttn' > del </button></li>
-                    <li><button class='operation-bttn'> / </button></li>
+                <button class='special-bttn'> C </button>
+                <button class='special-bttn'> +/- </button>
+                <button class='special-bttn'> % </button>
+                <button class='operation-bttn'> / </button>
 
-                </ul>
-                <ul>
-                    <li><button class="numb-bttn"> 7 </button></li>
-                    <li><button class="numb-bttn"> 8 </button></li>
-                    <li><button class="numb-bttn"> 9 </button></li>
-                    <li><button class="operation-bttn"> * </button></li>
-                </ul>
-                <ul>
-                    <li><button class="numb-bttn"> 4 </button></li>
-                    <li><button class="numb-bttn"> 5 </button></li>
-                    <li><button class="numb-bttn"> 6 </button></li>
-                    <li><button class="operation-bttn"> - </button></li>
+                <button class="numb-bttn"> 7 </button>
+                <button class="numb-bttn"> 8 </button>
+                <button class="numb-bttn"> 9 </button>
+                <button class="operation-bttn">*</button>
 
-                </ul>
-                <ul>
-                    <li><button class="numb-bttn"> 1 </button></li>
-                    <li><button class="numb-bttn"> 2 </button></li>
-                    <li><button class="numb-bttn"> 3 </button></li>
-                    <li><button class="operation-bttn"> + </button></li>
-                </ul>
-                <ul>
-                    <li><button class='numb-bttn'> 0 </button></li>
-                    <li><button class = 'special-bttn'>.</button></li>
-                    <li><button class = 'special-bttn'> +/- </button></li>
-                    <li><button id="equal-bttn"> = </button></li>
-                </ul>
+                <button class="numb-bttn"> 4 </button>
+                <button class="numb-bttn"> 5 </button>
+                <button class="numb-bttn"> 6 </button>
+                <button class="operation-bttn">-</button>
 
+                <button class="numb-bttn"> 1 </button>
+                <button class="numb-bttn"> 2 </button>
+                <button class="numb-bttn"> 3 </button>
+                <button class="operation-bttn"> + </button>
+
+                <button class='numb-bttn'> 0 </button>
+                <button class='special-bttn'> . </button>
+                <button id="equal-bttn"> = </button>
+            </div>
+            <div id = 'operation-book'>
+                <i class="fa-solid fa-trash"></i>
+                <p class = "operation"></p>
             </div>
         </div>
+
     </body>
 </html>

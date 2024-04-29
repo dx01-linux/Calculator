@@ -1,0 +1,78 @@
+*,
+body,
+#wrapper {
+    margin: 0%;
+    padding: 0%;
+    /* box-sizing: border-box; */
+}
+
+:root {
+    font-size: 12px;
+    --special-bttn-color: lightgrey;
+    --numb-bttn-color: grey;
+    --operator-color: orange;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: monospace;
+}
+
+
+#wrapper {
+    background-color: black;
+}
+
+#show-result-var {
+    width: 100vw;
+    height: 30vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 4rem;
+    color: white;
+}
+
+
+#keyboard {
+    width: 100vw;
+    height: 70vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+
+    /* basic buttons style */
+    >* {
+        font-size: 3rem;
+        border-radius: 60px;
+    }
+}
+
+.special-bttn {
+    background-color: var(--special-bttn-color);
+    border-color: var(--special-bttn-color);
+}
+
+.operation-bttn {
+    background-color: var(--operator-color);
+    border-color: var(--operator-color);
+    color: white;
+}
+
+.numb-bttn {
+    background-color: var(--numb-bttn-color);
+    border-color: var(--numb-bttn-color);
+}
+/* cero key */
+#keyboard :nth-child(17) {
+    grid-column: 1 / span 2;
+}
+
+#operation-book {
+    grid-area: three;
+    color: white;
+    position: relative;
+    visibility: hidden;
+}
+

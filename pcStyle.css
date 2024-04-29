@@ -1,34 +1,115 @@
-* , body , #wrapper {
+*,
+body,
+#wrapper {
     margin: 0%;
     padding: 0%;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
-#keyboard , #show-result-var {
-    padding: 0% 10%;
+
+:root {
+    font-size: 12px;
+    --special-bttn-color: grey;
+    --numb-bttn-color: grey;
+    --operator-color: orange;
 }
 
-#show-result-var ul {
-    list-style: none;
-    background-color: antiquewhite;
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: monospace;
+}
+
+
+#wrapper {
+    height: 100vh;
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+        "one one one one three three three "
+        "one one one one three three three "
+        "two two two two three three three"
+        "two two two two three three three"
+        "two two two two three three three";
+}
+#wrapper > :nth-child(n){
+    border: 1px solid #444242 ;
+}
+
+#show-result-var {
+    grid-area: one;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    font-size: 3.5em;
-    height: 1em;
-}
-#keyboard > ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-}
-#keyboard li {
-    display : flex ;
-    flex : auto ;
+    font-size: 4rem;
+    color: white;
+    background-color: gray;
 }
 
-#keyboard button {
-    flex: auto;
-    font-size: 3em;
-    border : none ;
+
+#keyboard {
+    grid-area: two;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+
+    /* basic buttons style */
+    >* {
+        font-size: 3rem;
+    }
+}
+
+.special-bttn {
+    background-color: var(--special-bttn-color);
+    border-color: var(--special-bttn-color);
+}
+
+.operation-bttn {
+    background-color: var(--operator-color);
+    border-color: var(--operator-color);
+    color: white;
+}
+
+.numb-bttn {
+    background-color: var(--numb-bttn-color);
+    border-color: var(--numb-bttn-color);
+}
+
+#keyboard :nth-child(n){
+    border: 1px solid #444242 ;
+    color : white ;
+}
+/* porcent key */
+#keyboard :nth-child(3) {
+    background-color: black;
+}
+/* equal key */
+#keyboard :last-child {
+    background-color: var(--operator-color);
+}
+/* cero key */
+#keyboard :nth-child(17) {
+    grid-column: 1 / span 2;
+}
+
+#operation-book {
+    grid-area: three;
+    color: white;
+    display: flex ;
+    flex-flow: column wrap;
+    row-gap: 5px;
+    overflow: scroll;
+}
+.operation {
+    height: calc(100% / 10%);
+    font-size: 2rem;
+    background-color: gray;
+}
+/* icon for deleting all saved operations */
+#operation-book > :nth-child(1){
+    color : red ;
+    align-self: center;
+    font-size: 3rem;
 }
