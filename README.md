@@ -9,19 +9,16 @@
 
 
 js :
-    * resVar : it take care of showing equations parts & performing changes on them
-    * keyboard : it hold all keys' type for events' handling 
-    * opertionBook : it take care of storage operation performed and manage them by adding more or erasing  existing ones
+    -resVar : it take care of showing equations parts & performing changes on them
+    -keyboard : it hold all keys'type's event handlers
+    -opertionBook : it take care of storage operation performed and manage them by adding more or erasing  existing ones
 
     *events:
-        // add number  
-
-        //add operator
-
-        // triggering operation 
-
-        //operators buttons 
-
-        //restore old operation in Operation book
-
-        //remove all operations in Operation Book
+       - keyboard   //listener:
+            add number  
+            add operator
+            triggering operation 
+            operators buttons 
+        - operationBook //listener:
+            restore old operation in Operation book
+            remove all operations in Operation Book
